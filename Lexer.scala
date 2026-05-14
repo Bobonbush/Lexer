@@ -6,18 +6,6 @@ class Lexer(private val stream: CharacterStream):
 
   private val diagnostics = ListBuffer[Diagnostic]()
 
-  private val keywords: Map[String, TokenType] = Map(
-    "if" -> TokenType.If,
-    "else" -> TokenType.Else,
-    "while" -> TokenType.While,
-    "for" -> TokenType.For,
-    "return" -> TokenType.Return,
-    "true" -> TokenType.True,
-    "false" -> TokenType.False,
-    "class" -> TokenType.Class,
-    "var" -> TokenType.Var,
-    "val" -> TokenType.Val
-  )
 
   def getDiagnostics: List[Diagnostic] =
     diagnostics.toList
@@ -144,7 +132,7 @@ class Lexer(private val stream: CharacterStream):
       stream.slice(start.offset, end.offset)
 
     val tokenType =
-      keywords.getOrElse(text, TokenType.Identifier)
+      TokenType.fromKeyword(text).getOrElse(TokenType.Identifier)
 
     Token(
       tokenType,
@@ -244,6 +232,8 @@ class Lexer(private val stream: CharacterStream):
 
         // multi-line comment
         case '/' if stream.peek(1) == '*' =>
+          val commentStart = stream.currentPosition()
+
           stream.advance()
           stream.advance()
 
@@ -256,6 +246,12 @@ class Lexer(private val stream: CharacterStream):
           if !stream.isEOF then
             stream.advance()
             stream.advance()
+          else
+            diagnostics += Diagnostic(
+              "Unterminated block comment",
+              Span(commentStart, stream.currentPosition())
+            )
+            looping = false
 
         case _ =>
           looping = false
