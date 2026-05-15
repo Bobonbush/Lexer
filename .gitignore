@@ -1,0 +1,19 @@
+# Scala / SBT
+target/
+.classpath
+.project
+.settings/
+project/target/
+*.class
+*.jar
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
