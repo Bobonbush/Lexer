@@ -1,0 +1,25 @@
+Token Type,Lexeme,Line,Column,Start Offset,End Offset
+Var,var,3,5,43,46
+Identifier,score,3,9,47,52
+Equal,=,3,15,53,54
+Number,10.5,3,17,55,59
+Semicolon,";",3,21,59,60
+If,if,4,5,66,68
+LeftParen,(,4,8,69,70
+Identifier,score,4,9,70,75
+GreaterEqual,>=,4,15,76,78
+Number,10,4,18,79,81
+AndAnd,&&,4,21,82,84
+True,true,4,24,85,89
+RightParen,),4,28,89,90
+LeftBrace,{,4,30,91,92
+Val,val,5,7,100,103
+Identifier,message,5,11,104,111
+Equal,=,5,19,112,113
+String,"""Hello, \""World\""!""",5,21,114,133
+Semicolon,";",5,40,133,134
+Return,return,6,7,142,148
+False,false,6,14,149,154
+Semicolon,";",6,19,154,155
+RightBrace,},7,5,161,162
+EOF,,8,5,168,168

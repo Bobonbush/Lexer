@@ -1,0 +1,58 @@
+package lexer
+
+@main def lexerTest(): Unit =
+
+  val source =
+    """
+      |// Variable declarations
+      |var x = 10;
+      |val y = 20.5;
+      |
+      |// Arithmetic
+      |x = x + y * 2;
+      |
+      |// Comparison
+      |if (x >= y && x != 0) {
+      |    print("Hello World");
+      |}
+      |
+      |/*
+      | Multi-line comment
+      |*/
+      |
+      |class Player {
+      |    var hp = 100;
+      |}
+      |
+      |@
+      |""".stripMargin
+
+  val stream = CharacterStream(source)
+
+  val lexer = Lexer(stream)
+
+  println("===================================")
+  println("LEXER TOKENS")
+  println("===================================\n")
+
+  var token = lexer.nextToken()
+
+  while token.tokenType != TokenType.EOF do
+    println(
+      f"${token.tokenType}%-15s | '${token.lexeme}'"
+    )
+
+    token = lexer.nextToken()
+
+  println(
+    f"${token.tokenType}%-15s | '${token.lexeme}'"
+  )
+
+  println("\n===================================")
+  println("DIAGNOSTICS")
+  println("===================================\n")
+
+  if lexer.getDiagnostics.isEmpty then
+    println("No lexer errors.")
+  else
+    lexer.getDiagnostics.foreach(println)

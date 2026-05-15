@@ -44,6 +44,18 @@ sbt compile
 sbt test
 ```
 
+## Run Lexer and Export CSV
+
+```powershell
+sbt run
+```
+
+This command will:
+
+1. Read `test.txt`
+2. Tokenize the source code
+3. Export the tokens into a `.csv` file
+
 ## Project Structure
 
 ```
@@ -54,6 +66,7 @@ src/
 │   ├── Lexer.scala
 │   ├── Position.scala
 │   ├── Span.scala
+│   ├── Main.scala
 │   ├── Token.scala
 │   └── TokenType.scala
 └── test/scala/lexer/
@@ -61,7 +74,7 @@ src/
 ```
 
 ## Components
-
+- **Main**: Entry point that reads `test.txt`, runs the lexer, and exports tokens into a CSV file
 - **CharacterStream**: Manages character input and position tracking
 - **Position**: Represents line and column information in source code
 - **Span**: Represents a range in source code (start and end positions)
